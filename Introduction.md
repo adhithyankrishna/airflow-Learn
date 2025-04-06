@@ -186,3 +186,6 @@ executor = DaskExecutor
 - **Isolation**: Each task runs in its own environment, preventing conflicts.  
 - **Resource Efficiency**: Only consumes resources when tasks are running.  
 - Ideal for cloud-native, high-scale deployments.  
+
+# scheduler
+** what is scheduler ** : it is object which continuously parse .py file in dag filder and form 
