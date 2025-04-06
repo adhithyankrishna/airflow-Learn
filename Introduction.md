@@ -188,4 +188,4 @@ executor = DaskExecutor
 - Ideal for cloud-native, high-scale deployments.  
 
 # scheduler
-** what is scheduler ** : it is object which continuously parse .py file in dag filder and form 
+- **what is scheduler** : it is object which continuously parse .py file in dag filder and form 
