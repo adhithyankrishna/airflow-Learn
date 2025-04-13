@@ -188,4 +188,56 @@ executor = DaskExecutor
 - Ideal for cloud-native, high-scale deployments.  
 
 # scheduler
-- **what is scheduler** : it is object which continuously parse .py file in dag filder and form 
+
+- **DAG Parsing**: Reading all the .py files in the dags_folder to load DAG definitions.
+- **DAGBag: All parsed** DAGs are stored in an in-memory structure called DAGBag.
+- **Database Interaction**: Scheduler updates the Metadata Database with the state of tasks.
+- **Task Queuing**: Scheduler puts tasks into a queue for Executors to pick up.
+- **Task State Handling:** Continuously monitors tasks and updates their state (queued, running, success, failed, etc.).
+ 
+## Efficiency Improvements
+
+- Airflow uses File Modification Timestamps to avoid parsing unchanged files repeatedly.
+- Uses Multi-Processing for parsing multiple DAG files concurrently to speed up the process.
+- You can control the number of processes with scheduler.max_threads.
+
+
+# Airflow Task Life Cycle
+
+# **none -> scheduled -> queued -> running -> success/failed/up_for_retry
+
+## none
+ - Initial state (no record in the metadata DB yet).
+ - Task hasn't been scheduled or executed yet.
+
+ ##  scheduled
+- Task is ready to be queued.
+- All upstream dependencies are met, and the schedule time has arrived.##- The scheduler marks it as "scheduled" for execution.
+
+## queued
+- Task is waiting in a queue (handled by the Executor).
+- Could be delayed here due to:
+- Pool limit
+- Parallelism limits
+- Resource constraints
+## running
+- Task is now actively being executed by the Executor.
+- Logs are being written.
+- Task code is running in the environment.
+## success
+ - Task completed successfully.
+ - Ready to trigger downstream tasks.
+## failed
+ - Task execution failed.
+ - If retries > 0, will move to up_for_retry.
+ - If no more retries, stays in failed state.
+## up_for_retry
+- Task will be retried after a delay (based on retry_delay).
+- Useful for transient errors like network issues, API failures, etc.
+## skipped
+- Happens when:
+- A branching operator skips a task.
+- Trigger rule isn’t satisfied (all_success, one_failed, etc.).
+
+
+
