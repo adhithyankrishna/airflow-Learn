@@ -246,4 +246,14 @@ executor = DaskExecutor
 
 # Airflow Variable  ,Connection and Secret Managment
 
-##
+## variable
+
+- it is key value pair store backed in metadata db 
+- it accesable across the dag 
+- help share common information across dag 
+- store env data et..
+### for cli
+```
+airflow variables set ENV production
+
+```
