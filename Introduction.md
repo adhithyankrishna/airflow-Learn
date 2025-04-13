@@ -241,3 +241,9 @@ executor = DaskExecutor
 
 
 
+
+
+
+# Airflow Variable  ,Connection and Secret Managment
+
+##
