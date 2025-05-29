@@ -258,5 +258,3 @@ airflow variables set ENV production
 
 ```
 
-
-check ofr git 

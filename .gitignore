@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.env
+.venv/
+env/
+venv/
+
+# Airflow
+logs/
+airflow.db
+unittests.cfg
+*.pid
+sqlite.db
+
+# System files
+.DS_Store
+*.swp
+
+# Jupyter Notebooks (if any)
+.ipynb_checkpoints/
+
+# VSCode or IDEs
+.vscode/
+.idea/
+
+# Airflow configuration and secrets
+airflow.cfg
+webserver_config.py
+
+# Git credentials or any local secrets
+secrets/
+*.key
+*.pem
+*.env
